@@ -3,7 +3,6 @@
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*" %>
 
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
@@ -12,10 +11,12 @@
 	</head>
 	
 	<body>
-		Input Your Login Information Below:
-	
+		ADMINISTRATIVE AND CUSTOMER REPRESENTATIVE LOGIN
 		<br>
-			<form method="get" action="show.jsp">
+		Input Your Login Information Below:
+		<br>
+		<br>
+			<form method="get" action="adminCustomerRepCheck.jsp">
 				<table>
 					<tr>    
 						<td>Username: </td><td><input type="text" name="username"></td>
@@ -59,5 +60,5 @@
 		</form>
 	<br> -->
 
-</body>
+	</body>
 </html>
