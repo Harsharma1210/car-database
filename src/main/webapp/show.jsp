@@ -31,6 +31,8 @@
 				out.print("Not a Valid User");
 			else
 				out.print("Welcome!");
+			
+			db.closeConnection(con);
 		%>
 			
 			
