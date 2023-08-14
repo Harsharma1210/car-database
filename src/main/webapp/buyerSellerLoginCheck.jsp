@@ -7,7 +7,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-		<title>Login Confirmed</title>
+		<title>Login</title>
 	</head>
 	<body>
 		<% try {
@@ -28,16 +28,18 @@
 			ResultSet result = stmt.executeQuery(str);
 			
 			if(!result.first())
-				out.print("Not a Valid User");
+			{
+				db.closeConnection(con);
+			    response.sendRedirect("createAccount.jsp");
+			}
 			else
-				out.print("Welcome!");
-			
-			db.closeConnection(con);
-		%>
-			
-			
-			
-		<%} catch (Exception e) {
+			{
+				db.closeConnection(con);
+				response.sendRedirect("regularUser.jsp");
+			}
+		} 
+		catch (Exception e) 
+		{
 			out.print(e);
 		}%>
 	
