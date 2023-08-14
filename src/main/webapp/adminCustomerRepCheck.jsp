@@ -7,7 +7,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-		<title>Login Confirmed</title>
+		<title>Login</title>
 	</head>
 	<body>
 		<% try {
@@ -27,10 +27,34 @@
 			//Run the query against the database.
 			ResultSet result = stmt.executeQuery(str);
 			
-			if(!result.first())
-				out.print("Not a Valid User");
+			if(!result.first()){ %>
+				INCORRECT LOGIN INFO!!!
+				<br><br>
+				Input Your Login Information Below:
+				<br><br>
+				<form method="get" action="adminCustomerRepCheck.jsp">
+					<table>
+						<tr>    
+							<td>Username: </td><td><input type="text" name="username"></td>
+						</tr>
+						<tr>
+							<td>Password: </td><td><input type="text" name="password"></td>
+						</tr>
+					</table>
+					<input type="submit" value="Submit">
+				</form>
+				<br><br>
+				<a href="start.jsp">
+					<button style="border-radius:5px;background-color:#333333;color:#FFFFFF;height:20px;weight:20px">
+						GO BACK
+					</button>
+				</a>
+		<%	}
 			else
-				out.print("Welcome!");
+			{
+				db.closeConnection(con);
+				response.sendRedirect("adminPage.jsp");
+			}
 			
 			db.closeConnection(con);
 		%>
