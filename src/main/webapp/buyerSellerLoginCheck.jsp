@@ -19,18 +19,39 @@
 			//Create a SQL statement
 			Statement stmt = con.createStatement();
 			//Get the selected radio button from the index.jsp
-			String entity = request.getParameter("username");
-			String entity2 = request.getParameter("password");
+			String entity = request.getParameter("buyerusername");
+			String entity2 = request.getParameter("buyerpassword");
 			//Make a SELECT query from the table specified by the 'command' parameter at the index.jsp
-			String str = "SELECT username, password FROM buyer WHERE username=\'" + entity +
+			String str = "SELECT username, password FROM buyerseller WHERE username=\'" + entity +
 				"\' AND password=\'" + entity2 +"\'";
 			//Run the query against the database.
 			ResultSet result = stmt.executeQuery(str);
 			
 			if(!result.first())
 			{
-				db.closeConnection(con);
-			    response.sendRedirect("createAccount.jsp");
+				%>
+					INCORRECT LOGIN INFO!!!
+					<br><br>
+					Input Your Login Information Below:
+					<br><br>
+					<form method="get" action="buyerSellerLoginCheck.jsp">
+						<table>
+							<tr>    
+								<td>Username: </td><td><input type="text" name="username"></td>
+							</tr>
+							<tr>
+								<td>Password: </td><td><input type="text" name="password"></td>
+							</tr>
+						</table>
+						<input type="submit" value="Submit">
+					</form>
+					<br><br>
+					<a href="createAccount.jsp">
+						<button style="border-radius:5px;background-color:#333333;color:#FFFFFF;height:20px;weight:20px">
+							CREATE ACCOUNT
+						</button>
+					</a>
+				<%
 			}
 			else
 			{
