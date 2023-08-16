@@ -37,10 +37,10 @@
 					<form method="get" action="buyerSellerLoginCheck.jsp">
 						<table>
 							<tr>    
-								<td>Username: </td><td><input type="text" name="username"></td>
+								<td>Username: </td><td><input type="text" name="buyerusername"></td>
 							</tr>
 							<tr>
-								<td>Password: </td><td><input type="text" name="password"></td>
+								<td>Password: </td><td><input type="text" name="buyerpassword"></td>
 							</tr>
 						</table>
 						<input type="submit" value="Submit">
