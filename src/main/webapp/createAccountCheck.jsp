@@ -41,6 +41,9 @@
 				Statement stmt2 = con.createStatement();
 				String str2 = "INSERT INTO buyerseller VALUES (" + newIdNum + ", " + entity + ", " + entity2 + ")";
 				int rows = stmt2.executeUpdate(str2);
+
+				db.closeConnection(con);
+				response.sendRedirect("accountCreated.jsp");
 			}
 			else
 			{
