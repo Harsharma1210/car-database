@@ -21,45 +21,56 @@
 			//Get the selected radio button from the index.jsp
 			String entity = request.getParameter("username");
 			String entity2 = request.getParameter("password");
-			//Make a SELECT query from the table specified by the 'command' parameter at the index.jsp
-			String str = "SELECT username, password FROM buyer WHERE username=\'" + entity +
-				"\' AND password=\'" + entity2 +"\'";
-			//Run the query against the database.
-			ResultSet result = stmt.executeQuery(str);
 			
-			if(!result.first()){ %>
-				INCORRECT LOGIN INFO!!!
-				<br><br>
-				Input Your Login Information Below:
-				<br><br>
-				<form method="get" action="adminCustomerRepCheck.jsp">
-					<table>
-						<tr>    
-							<td>Username: </td><td><input type="text" name="username"></td>
-						</tr>
-						<tr>
-							<td>Password: </td><td><input type="text" name="password"></td>
-						</tr>
-					</table>
-					<input type="submit" value="Submit">
-				</form>
-				<br><br>
-				<a href="start.jsp">
-					<button style="border-radius:5px;background-color:#333333;color:#FFFFFF;height:20px;weight:20px">
-						GO BACK
-					</button>
-				</a>
-		<%	}
-			else
+			//Check to see if the login information matches those of an admin
+			if((entity.equals("admin")) && (entity2.equals("admin")))
 			{
+				//We send it to the Admin Webpage instead of the Customer Rep page
 				db.closeConnection(con);
 				response.sendRedirect("adminPage.jsp");
 			}
-			
-			db.closeConnection(con);
-		%>
-			
-			
+			else
+			{
+				//WE CHECK THE CUSTOMER REP DATABASE FOR A SUCCESSFUL LOGIN
+				//Make a SELECT query from the table specified by the 'command' parameter at the index.jsp
+				String str = "SELECT username, password FROM customerrep WHERE username=\'" + entity +
+					"\' AND password=\'" + entity2 +"\'";
+				//Run the query against the database.
+				ResultSet result = stmt.executeQuery(str);
+				
+				if(!result.first()){ %>
+					INCORRECT LOGIN INFO!!!
+					<br><br>
+					Input Your Login Information Below:
+					<br><br>
+					<form method="get" action="adminCustomerRepCheck.jsp">
+						<table>
+							<tr>    
+								<td>Username: </td><td><input type="text" name="username"></td>
+							</tr>
+							<tr>
+								<td>Password: </td><td><input type="text" name="password"></td>
+							</tr>
+						</table>
+						<input type="submit" value="Submit">
+					</form>
+					<br><br>
+					<a href="start.jsp">
+						<button style="border-radius:5px;background-color:#333333;color:#FFFFFF;height:20px;weight:20px">
+							GO BACK
+						</button>
+					</a>
+			<%	}
+				else
+				{
+					//REDIRECT TO CUSTOMER REP PAGE
+					db.closeConnection(con);
+					response.sendRedirect("customerRep.jsp");
+				}
+				
+				db.closeConnection(con);
+			}
+			%>	
 		<%} catch (Exception e) {
 			out.print(e);
 		}%>
