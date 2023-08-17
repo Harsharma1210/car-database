@@ -35,13 +35,18 @@
 				String idNumQuery = "SELECT MAX(buyerid) as max_id FROM buyerseller";
 				ResultSet idResult = idQuery.executeQuery(idNumQuery);
 				
-				int newIdNum = idResult.getInt(1) + 1;
+				int newIdNum = 0;
+				
+				if(result.next())
+				{
+					newIdNum = idResult.getInt(1) + 1;
+				}
 				
 				//WE CAN CREATE THE ACCOUNT BECAUSE IT DOESN'T EXIST
 				Statement stmt2 = con.createStatement();
-				String str2 = "INSERT INTO buyerseller VALUES (" + newIdNum + ", " + entity + ", " + entity2 + ")";
+				String str2 = "INSERT INTO buyerseller VALUES (" + newIdNum + ", \'" + entity + "\', \'" + entity2 + "\')";
 				int rows = stmt2.executeUpdate(str2);
-
+				
 				db.closeConnection(con);
 				response.sendRedirect("accountCreated.jsp");
 			}
