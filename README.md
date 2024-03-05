@@ -1,4 +1,4 @@
-# car-database
+# Car Database
 
 This is a project utilizing Java, MySQL, and Java Sevlet via Apache Tomcat to host a barebones full-stack application which functions as a Car Auction site.
 
